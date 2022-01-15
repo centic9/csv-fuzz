@@ -18,30 +18,21 @@ import org.apache.commons.csv.CSVRecord;
  * It catches all exceptions that are currently expected.
  */
 public class Fuzz {
-	private static final CSVFormat[] FORMATS = new CSVFormat[] {
-			CSVFormat.DEFAULT,
-			CSVFormat.EXCEL,
-			CSVFormat.INFORMIX_UNLOAD,
-			CSVFormat.MONGODB_CSV,
-			CSVFormat.MONGODB_TSV,
-			CSVFormat.MYSQL,
-			CSVFormat.ORACLE,
-			CSVFormat.POSTGRESQL_CSV,
-			CSVFormat.POSTGRESQL_TEXT,
-			CSVFormat.RFC4180,
-			CSVFormat.TDF,
-			CSVFormat.Builder.create().build(),
-	};
-
 	public static void fuzzerTestOneInput(byte[] inputData) {
-		for (CSVFormat format : FORMATS) {
-			try (InputStream stream = new ByteArrayInputStream(inputData);
-					Reader in = new BufferedReader(new InputStreamReader(stream), 100*1024)) {
-				Iterable<CSVRecord> records = format.parse(in);
-				records.iterator();
-			} catch (IOException e) {
-				// expected here
-			}
+		for (CSVFormat.Predefined format : CSVFormat.Predefined.values()) {
+			checkCSV(inputData, format.getFormat());
+		}
+
+		checkCSV(inputData, CSVFormat.Builder.create().build());
+	}
+
+	private static void checkCSV(byte[] inputData, CSVFormat format) {
+		try (InputStream stream = new ByteArrayInputStream(inputData);
+				Reader in = new BufferedReader(new InputStreamReader(stream), 100*1024)) {
+			Iterable<CSVRecord> records = format.parse(in);
+			records.iterator();
+		} catch (IOException e) {
+			// expected here
 		}
 	}
 }

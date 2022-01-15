@@ -25,8 +25,8 @@ class FuzzTest {
 	}
 
 	@Test
-	public void testWithValidArchive() throws IOException {
-		byte[] bytes = FileUtils.readFileToByteArray(new File("src/test/resources/bla.tar"));
+	public void testWithValidFile() throws IOException {
+		byte[] bytes = FileUtils.readFileToByteArray(new File("src/test/resources/sample1.csv"));
 		Fuzz.fuzzerTestOneInput(bytes);
 	}
 

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Iterator;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -30,8 +31,18 @@ public class Fuzz {
 		try (InputStream stream = new ByteArrayInputStream(inputData);
 				Reader in = new BufferedReader(new InputStreamReader(stream), 100*1024)) {
 			Iterable<CSVRecord> records = format.parse(in);
-			records.iterator();
-		} catch (IOException e) {
+
+			Iterator<CSVRecord> it = records.iterator();
+			while (it.hasNext()) {
+				CSVRecord record = it.next();
+				//noinspection ResultOfMethodCallIgnored
+				record.getComment();
+				//noinspection ResultOfMethodCallIgnored
+				record.toString();
+				//noinspection ResultOfMethodCallIgnored
+				record.toList();
+			}
+		} catch (IOException | IllegalStateException e) {
 			// expected here
 		}
 	}

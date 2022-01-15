@@ -36,7 +36,13 @@ Unpack the archive:
 
 Invoke the fuzzing:
 
+With only fuzzing the CSV input file based on input files:
+
     ./jazzer --cp=build/libs/csv-fuzz-all.jar --instrumentation_includes=org.apache.commons.** --target_class=org.dstadler.csv.fuzz.Fuzz -rss_limit_mb=4096 corpus
+
+When also fuzzing the CSV format (cannot use an external corpus):
+
+    ./jazzer --cp=build/libs/csv-fuzz-all.jar --instrumentation_includes=org.apache.commons.** --target_class=org.dstadler.csv.fuzz.FuzzComplex -rss_limit_mb=4096 corpusComplex
 
 In this mode Jazzer will stop whenever it detects an unexpected exception 
 or crashes.

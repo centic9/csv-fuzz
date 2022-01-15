@@ -46,10 +46,19 @@ mkdir -p build/jacoco
   -rss_limit_mb=4096 \
   -runs=0 \
   corpus
+./jazzer \
+  --cp=build/libs/csv-fuzz-all.jar \
+  --instrumentation_includes=org.apache.commons.** \
+  --target_class=org.dstadler.csv.fuzz.FuzzComplex \
+  --nohooks \
+  --jvm_args="-javaagent\\:build/jacocoagent.jar=destfile=build/jacoco/corpusComplex.exec" \
+  -rss_limit_mb=4096 \
+  -runs=0 \
+  corpusComplex
 
 
 # Finally create the JaCoCo report
-java -jar /opt/poi/lib/util/jacococli.jar report build/jacoco/corpus.exec \
+java -jar /opt/poi/lib/util/jacococli.jar report build/jacoco/corpus.exec build/jacoco/corpusComplex.exec \
  --classfiles build/csvFiles \
  --sourcefiles /opt/apache/commons-csv/git/src/main/java/ \
  --html build/reports/jacoco

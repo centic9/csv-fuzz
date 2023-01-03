@@ -13,6 +13,7 @@ corpusComplex/
 /jazzer_api_deploy.jar
 /jazzer-*.tar.gz
 /jacoco-*.zip
+/jazzer_standalone.jar
 
 # Jazzer result/crash files
 /crash-*

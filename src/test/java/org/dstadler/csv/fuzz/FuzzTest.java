@@ -30,6 +30,12 @@ class FuzzTest {
 		Fuzz.fuzzerTestOneInput(bytes);
 	}
 
+	@Test
+	public void testWithSimpleFile() throws IOException {
+		byte[] bytes = FileUtils.readFileToByteArray(new File("src/test/resources/simple.csv"));
+		Fuzz.fuzzerTestOneInput(bytes);
+	}
+
 	@Disabled("Local test for verifying a slow run")
 	@Test
 	public void testSlowUnit() throws IOException {

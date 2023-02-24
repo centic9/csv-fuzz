@@ -1,6 +1,7 @@
 package org.dstadler.csv.fuzz;
 
 import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.DuplicateHeaderMode;
 import org.apache.commons.csv.QuoteMode;
 
 import com.code_intelligence.jazzer.api.FuzzedDataProvider;
@@ -18,7 +19,8 @@ public class FuzzComplex {
 
 		final CSVFormat format;
 		try {
-			builder.setAllowDuplicateHeaderNames(data.consumeBoolean());
+			builder.setDuplicateHeaderMode(
+					DuplicateHeaderMode.values()[data.consumeInt(0, DuplicateHeaderMode.values().length-1)]);
 			builder.setAllowMissingColumnNames(data.consumeBoolean());
 			builder.setAutoFlush(data.consumeBoolean());
 			builder.setCommentMarker(data.consumeChar());

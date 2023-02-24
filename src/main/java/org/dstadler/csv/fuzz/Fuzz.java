@@ -1,5 +1,7 @@
 package org.dstadler.csv.fuzz;
 
+import java.io.UncheckedIOException;
+
 import org.apache.commons.csv.CSVFormat;
 
 /**
@@ -12,7 +14,11 @@ import org.apache.commons.csv.CSVFormat;
 public class Fuzz {
 	public static void fuzzerTestOneInput(byte[] inputData) {
 		for (CSVFormat.Predefined format : CSVFormat.Predefined.values()) {
-			FuzzBase.checkCSV(inputData, format.getFormat());
+			try {
+				FuzzBase.checkCSV(inputData, format.getFormat());
+			} catch (Throwable e) {
+				throw new IllegalStateException("While using format: " + format, e);
+			}
 		}
 
 		FuzzBase.checkCSV(inputData, CSVFormat.Builder.create().build());

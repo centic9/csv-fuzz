@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UncheckedIOException;
 import java.util.Iterator;
 
 import org.apache.commons.csv.CSVFormat;
@@ -27,13 +28,13 @@ public class FuzzBase {
 				record.getComment();
 				//noinspection ResultOfMethodCallIgnored
 				record.toString();
-				//noinspection ResultOfMethodCallIgnored
 				record.toList();
 			}
 
-			CSVPrinter printer = new CSVPrinter(NullAppendable.INSTANCE, format);
-			printer.printRecords(records);
-		} catch (IOException | IllegalStateException | NegativeArraySizeException | IllegalArgumentException e) {
+			try (CSVPrinter printer = new CSVPrinter(NullAppendable.INSTANCE, format)) {
+				printer.printRecords(records);
+			}
+		} catch (IOException | UncheckedIOException | IllegalStateException | NegativeArraySizeException | IllegalArgumentException e) {
 			// expected here
 		}
 	}

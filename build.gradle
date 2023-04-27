@@ -21,10 +21,10 @@ dependencies {
 	//noinspection GradlePackageUpdate
 	implementation 'commons-io:commons-io:2.11.0'
 
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
-	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
-	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
-	testImplementation 'org.mockito:mockito-core:4.11.0'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.3'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
+	testImplementation 'org.mockito:mockito-core:5.3.1'
 }
 
 test {
@@ -46,7 +46,7 @@ wrapper {
 }
 
 jacoco {
-	toolVersion = '0.8.8'
+	toolVersion = '0.8.10'
 }
 
 task getDeps(type: Copy) {

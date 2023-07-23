@@ -21,7 +21,7 @@ Build the fuzzing target:
 
 Copy over the corpus of test-files from Apache Commons Compress sources
 
-    cp -a /opt/commons-csv/test/src/resources corpus/
+    cp -a /opt/commons-csv/src/test/resources corpus/
 
 You can add documents from other testing-corpora as well. Valid documents
 as well as slightly broken ones are good sources as this helps the fuzzer 
@@ -53,7 +53,7 @@ See `./jazzer` for options which can control details of how Jazzer operates.
 
 # License
 
-Copyright 2022 Dominik Stadler
+Copyright 2023 Dominik Stadler
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -23,6 +23,10 @@ Copy over the corpus of test-files from Apache Commons Compress sources
 
     cp -a /opt/commons-csv/src/test/resources corpus/
 
+Create a directory for the "complex" fuzzing
+
+    mkdir -p corpusComplex
+
 You can add documents from other testing-corpora as well. Valid documents
 as well as slightly broken ones are good sources as this helps the fuzzer 
 to come up with interesting new cases. 
@@ -40,7 +44,7 @@ With only fuzzing the CSV input file based on input files:
 
     ./jazzer --cp=build/libs/csv-fuzz-all.jar --instrumentation_includes=org.apache.commons.** --target_class=org.dstadler.csv.fuzz.Fuzz -rss_limit_mb=4096 corpus
 
-When also fuzzing the CSV format (cannot use an external corpus):
+When also fuzzing the CSV format via "complex" fuzzing (cannot use an external corpus):
 
     ./jazzer --cp=build/libs/csv-fuzz-all.jar --instrumentation_includes=org.apache.commons.** --target_class=org.dstadler.csv.fuzz.FuzzComplex -rss_limit_mb=4096 corpusComplex
 

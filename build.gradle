@@ -13,18 +13,18 @@ dependencies {
 	implementation 'org.apache.commons:commons-csv:1.10.0'
 
 	// for configuring log4j to be silent during fuzzing
-    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.21.1'
+	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.21.1'
 
-	implementation 'com.code-intelligence:jazzer-api:0.21.1'
+	implementation 'com.code-intelligence:jazzer-api:0.22.1'
 
 	//noinspection GradlePackageUpdate
-	implementation 'commons-io:commons-io:2.14.0'
+	implementation 'commons-io:commons-io:2.15.0'
 
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
 	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
-	testImplementation 'org.mockito:mockito-core:5.5.0'
+	testImplementation 'org.mockito:mockito-core:5.6.0'
 }
 
 test {
@@ -46,7 +46,7 @@ wrapper {
 }
 
 jacoco {
-	toolVersion = '0.8.10'
+	toolVersion = '0.8.11'
 }
 
 task getDeps(type: Copy) {
